@@ -9,12 +9,12 @@ std::string getNameClass(Type *obj)
     char *demangled = abi::__cxa_demangle(typeid(obj).name(), 0, 0, &status);
     return demangled;
 }
-
 template <typename Type>
 int FindById(std::vector<Type *> lista, int id)
 {
     for (int i = 0; i < lista.size(); i++)
     {
+        
         Type *e = lista[i];
         if (id == e->getId())
         {
@@ -38,22 +38,4 @@ int Find(std::vector<Type *> lista, bool (*validador)(Type *))
     }
     return tmp;
     // lista.erase(lista.begin() + index);
-}
-// TODO es necesario un cambio
-struct EndEntity
-{
-    int id;
-    std::string classname;
-};
-
-std::vector<EndEntity> ___borrar;
-
-// agrega a la lista para los elementos a eliminar
-template <typename Type>
-void RemoveEntity(Type *e)
-{
-    EndEntity endT;
-    endT.id = e->getId();
-    endT.classname = getNameClass(e);
-    ___borrar.push_back(endT);
 }

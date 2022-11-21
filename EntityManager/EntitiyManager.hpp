@@ -4,19 +4,22 @@
 template <typename Type>
 void DrawEntity(Type *e)
 {
-    int x = e->getX();
-    int y = e->getY();
-    glPushMatrix();
-    glTranslatef(e->getX(), e->getY(), 0);
-    glPointSize(2);
-    glBegin(GL_LINE_STRIP);
-    for (int i = 0; i < e->getListLines().size(); i++)
+    // validamos si hay una cionicion
+    if (!false)
     {
-        Lines lin = e->getLine(i);
-        glVertex2f(lin._x, lin._y);
-    };
-    glEnd();
-    glPopMatrix();
+        glPushMatrix();
+        glTranslatef(e->getX(), e->getY(), 0);
+        glPointSize(2);
+        glBegin(GL_LINE_STRIP);
+        for (int i = 0; i < e->getListLines().size(); i++)
+        {
+            Lines lin = e->getLine(i);
+            glVertex2f(lin._x, lin._y);
+        };
+        glEnd();
+        glPopMatrix();
+        
+    }
 }
 // dividir codigo
 bool update = false;

@@ -5,36 +5,55 @@
 #include "..\asset\disparo\DisparoConfig.hpp"
 #include "..\asset\nave\NaveConfig.hpp"
 #include <windows.h>
+// TODO es necesario un cambio
+
+std::vector<RegistroSolidos> enMapa;
+// permite borrar une elemento de la lista por su id
 template <typename Type>
-void rmId(std::vector<Type> &listado, auto it, std::string tipo)
+void rmId(std::vector<Type> &listado, EndEntity it, std::string tipo)
 {
-    if (it->classname == tipo)
+    Console->log(it.classname+" - "+tipo);
+    if (it.classname == tipo)
     {
-        int r = FindById(listado, it->id);
+        int r = FindById(listado, it.id);
         if (r > -1)
         {
+            Console->log("borrando elemento encontrado");
             listado.erase(listado.begin() + r);
-            Console->warning("elemento descargado de la col" + std::to_string(it->id));
         }
     }
 }
 // render method by list
+bool col = false;
+
 // metodo encargado de destruir las entidades
 void remove()
 {
-    for (auto it = ___borrar.begin(); it != ___borrar.end(); ++it)
+    int ref = ___borrar.size();
+    if (!___borrar.empty())
     {
-        Console->gotoxy(5, 10);
-        std::cout << "vaciando lista de items: " << ___borrar.size() << std::endl;
-        // es necesario agregarlo a la lista de elementos de rm
-        // listado de referencia, clase de comparacion, nombre de clase
-        // todo es necesario agregarlos a la lista de destruccion
-        rmId(___render_list_disparo, it, getNameClass(getDisparo(0.0f, 0.0f)));
-        rmId(___render_list_box, it, getNameClass(getBox(0.0f, 0.0f)));
-        rmId(___render_list_misil, it, getNameClass(getMisil(0.0f, 0.0f)));
-        rmId(___render_list_nave, it, getNameClass(getNavePlayer(0.0f, 0.0f)));
+        for (int i = 0; i < ref; i++)
+        {
+            EndEntity it = ___borrar[i];
+            rmId(___render_list_disparo, it, getNameClass(getDisparo(0.0f, 0.0f)));
+            rmId(___render_list_box, it, getNameClass(getBox(0.0f, 0.0f)));
+            rmId(___render_list_misil, it, getNameClass(getMisil(0.0f, 0.0f)));
+            rmId(___render_list_nave, it, getNameClass(getNavePlayer(0.0f, 0.0f)));
+            if (col)
+            {
+                Console->log("vaciada !");
+            }
+            else
+            {
+                Console->error("vaciada !");
+            }
+            col = !col;
+        }
+        // Console->gotoxy(15, 15);
+        // std::cout << "---borrando--------------" << std::endl;
+        ___borrar.clear();
     }
-    ___borrar.clear();
+    // std::cout << ___borrar.size() << std::endl;
 }
 template <typename Type>
 void RenderViewsByListEntities(
@@ -44,6 +63,9 @@ void RenderViewsByListEntities(
     int x = 0, int y = 0)
 {
     remove();
+    Console->gotoxy(10, 10);
+    Console->log(___borrar.size());
+
     for (size_t i = 0; i < listado.size(); i++)
     {
         Type *e = listado[i];

@@ -44,13 +44,15 @@ namespace ContextoNave
             }
             else if (key == 111) // disparo
             {
-                addEntity(ContextoMisil::getMisil(getX(), getY()));
-                // moveX(paso);
+                // addEntity(ContextoMisil::getMisil(getX(), getY()));
+                //  moveX(paso);
             }
         }
         void update()
         {
             // live -= 0.05f;
+            //      destructor();
+            //
         }
         ~Nave();
     };

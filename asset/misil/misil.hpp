@@ -29,7 +29,7 @@ namespace ContextoMisil
                 moveY(step);
                 if (getY() >= 1.0f)
                 {
-                    RemoveEntity(this);
+                    destructor();
                 }
             }
         }

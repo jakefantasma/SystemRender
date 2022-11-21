@@ -6,30 +6,29 @@ namespace ContextoDisparo
     class Disparo : public Entity
     {
     private:
-        float live = 100;
         bool isUp = true;
         float step = 0.004f;
+        float limit = 0.50f;
 
     public:
         Disparo(float x_, float y_) : Entity(x_, y_){};
         void def()
         {
+            setNameClass("ContextoDisparo::Disparo*");
             AddLine(0.02f, 0.04f);
             AddLine(0.02f, 0.01f);
         }
         void update()
         {
-            if (isUp)
+            if (getY() >= limit)
+            {
+                Console->gotoxy(20, 20);
+                Console->log(getY());
+                destructor();
+            }
+            else
             {
                 moveY(step);
-                if (getY() >= 1.0f)
-                {
-                    RemoveEntity(this);
-                }
-                if (getY() == 1.3f)
-                {
-                    step = -step;
-                }
             }
         }
         ~Disparo();

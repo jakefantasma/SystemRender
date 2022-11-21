@@ -5,7 +5,7 @@ int main(int argc, char **argv)
     // addEntity(getBox(0.2f, 0.00f));
     // addEntity(getBox(0.3f, 0.00f));
     // addEntity(getBox(0.1f, 0.00f));
-    addEntity(getNavePlayer(0.4f, 0.00f));
+    addEntity(getNavePlayer(0.2f, 0.00f));
     RunGame(argc, argv);
 }
 /*

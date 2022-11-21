@@ -1,5 +1,5 @@
 #pragma once
-#include <GL/freeglut.h>
+#include <GL\freeglut.h>
 #include <iostream>
 #include <vector>
 #include "includes\Console\Console.hpp"
@@ -13,5 +13,8 @@ void UpdatesEntities();
 void removeById(int);
 
 #include "asset\PaletaColores.hpp"
+#include "EntityManager\Entity.hpp"
 #include "EntityManager\EntitiyManager.hpp"
 #include "EntityManager\Entityes.hpp"
+
+
